@@ -1,0 +1,116 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "version": "1.0.0",
+  "name": {
+    "short": "Time Slots",
+    "full": "Time Slots Picker"
+  },
+  "description": {
+    "short": "Select calendar time slots to offer in emails",
+    "full": "Pick available time windows from your calendar and insert a formatted list into the email you're composing. See your existing events so you know which times are actually good to offer."
+  },
+  "developer": {
+    "name": "Relay Strategy Partners",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000",
+    "termsOfUseUrl": "https://localhost:3000"
+  },
+  "icons": {
+    "outline": "assets/icon-32.png",
+    "color": "assets/icon-80.png"
+  },
+  "accentColor": "#4A90D9",
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "Mailbox.ReadWrite.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  },
+  "extensions": [
+    {
+      "requirements": {
+        "scopes": ["mail"],
+        "capabilities": [
+          {
+            "name": "Mailbox",
+            "minVersion": "1.5"
+          }
+        ]
+      },
+      "runtimes": [
+        {
+          "requirements": {
+            "capabilities": [
+              {
+                "name": "Mailbox",
+                "minVersion": "1.5"
+              }
+            ]
+          },
+          "id": "TaskPaneRuntime",
+          "type": "general",
+          "code": {
+            "page": "https://localhost:3000/taskpane.html"
+          },
+          "lifetime": "short",
+          "actions": [
+            {
+              "id": "openTaskPane",
+              "type": "openPage",
+              "pinnable": true,
+              "view": "content"
+            }
+          ]
+        }
+      ],
+      "ribbons": [
+        {
+          "contexts": ["mailCompose"],
+          "tabs": [
+            {
+              "builtInTabId": "TabDefault",
+              "groups": [
+                {
+                  "id": "timeSlotsGroup",
+                  "label": "Time Slots",
+                  "icons": [
+                    { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                    { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                    { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
+                  ],
+                  "controls": [
+                    {
+                      "id": "openTimeSlotsPane",
+                      "type": "button",
+                      "label": "Time Slots",
+                      "icons": [
+                        { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                        { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                        { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
+                      ],
+                      "supertip": {
+                        "title": "Pick Time Slots",
+                        "description": "Open your calendar to select available time windows and insert them into your email"
+                      },
+                      "actionId": "openTaskPane"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "webApplicationInfo": {
+    "id": "$AZURE_CLIENT_ID",
+    "resource": "api://localhost:3000/$AZURE_CLIENT_ID"
+  }
+}
